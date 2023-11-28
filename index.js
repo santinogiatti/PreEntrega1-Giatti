@@ -36,5 +36,5 @@ if (usuarios.some(usuario => usuario.contraseña === datosUsuario.contraseña)) 
   console.log("Tu fecha de cumpleaños es: " + usuarioEncontrado.fechaCumpleaños);
 
 } else {
-  console.log("Has agotado tus intentos. Acceso denegado.");
+  alert("Has agotado tus intentos. Acceso denegado.");
 }
