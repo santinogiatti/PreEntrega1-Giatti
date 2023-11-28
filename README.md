@@ -1,1 +1,1 @@
-# PreEntrega1-Giatti Este es mi repositorio para la primer preentrega del curso. saludos !
+# PreEntrega2-Giatti Este es mi repositorio para la segunda preentrega del curso. saludos !

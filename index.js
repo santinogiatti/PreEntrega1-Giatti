@@ -5,6 +5,7 @@ let usuarios = [
 ];
 
 let intentos = 3;
+let datosUsuario; // Declarar datosUsuario fuera del bucle
 
 function obtenerDatosUsuario() {
   return {
@@ -20,7 +21,8 @@ do {
     console.log(`Contraseña incorrecta. Te quedan ${intentos} intentos.`);
   }
 
-  let datosUsuario = obtenerDatosUsuario();
+  datosUsuario = obtenerDatosUsuario(); // Asignar valor a datosUsuario
+
   intentos--;
 
 } while (!usuarios.some(usuario => usuario.contraseña === datosUsuario.contraseña) && intentos > 0);
