@@ -1,40 +1,69 @@
-let usuarios = [
-  { nombre: "Juan", apellido: "Pérez", fechaCumpleaños: "01/05/1990", contraseña: "juan123" },
-  { nombre: "Ana", apellido: "Gómez", fechaCumpleaños: "15/08/1985", contraseña: "ana456" },
-  // Agrega más usuarios si es necesario
-];
+// index.js
+document.addEventListener('DOMContentLoaded', function () {
+    let intentos = 2;
 
-let intentos = 3;
-let datosUsuario; // Declarar datosUsuario fuera del bucle
+    let usuarioActual; // Almacena la información del usuario que inició sesión
 
-function obtenerDatosUsuario() {
-  return {
-    nombre: prompt("Por favor, ingresa tu nombre:"),
-    apellido: prompt("Ahora, ingresa tu apellido:"),
-    fechaCumpleaños: prompt("Ingresa tu fecha de cumpleaños (DD/MM/AAAA):"),
-    contraseña: prompt("Ingresa la contraseña para ingresar:")
-  };
-}
+    function obtenerDatosUsuario() {
+        return {
+            nombre: document.getElementById("nombreInput").value,
+            apellido: document.getElementById("apellidoInput").value,
+            fechaCumpleaños: document.getElementById("fechaInput").value,
+            contraseña: document.getElementById("contraseñaInput").value
+        };
+    }
 
-do {
-  if (intentos < 3) {
-    console.log(`Contraseña incorrecta. Te quedan ${intentos} intentos.`);
-  }
+    let formularioDiv = document.getElementById('formulario');
+    let agradecimientoDiv = document.getElementById('agradecimiento');
+    let inicioSesionButton = document.getElementById('inicioSesionButton');
+    let verificarContraseñaButton = document.getElementById('verificarContraseña');
 
-  datosUsuario = obtenerDatosUsuario(); // Asignar valor a datosUsuario
+    inicioSesionButton.addEventListener('click', function () {
+        let datosUsuario = obtenerDatosUsuario();
 
-  intentos--;
+        // Tu lógica de validación y almacenamiento aquí
+        // Puedes comparar con usuarios almacenados o almacenar directamente en el localStorage
 
-} while (!usuarios.some(usuario => usuario.contraseña === datosUsuario.contraseña) && intentos > 0);
+        if (datosUsuario.nombre && datosUsuario.apellido && datosUsuario.fechaCumpleaños && datosUsuario.contraseña) {
+            // Almacenar información del usuario que inició sesión
+            usuarioActual = datosUsuario;
 
-if (usuarios.some(usuario => usuario.contraseña === datosUsuario.contraseña)) {
-  console.log("¡Acceso concedido!");
+            // Si se ingresaron todos los datos, mostrar la tarjeta de agradecimiento
+            formularioDiv.style.opacity = '0';
+            agradecimientoDiv.style.display = 'block';
+            setTimeout(() => {
+                agradecimientoDiv.style.opacity = '1';
+                // Llamar al usuario por su nombre
+                alert(`¡Acceso intermedio`);
+            }, 100);
+        } else {
+            // Manejar el caso en el que no se ingresaron todos los datos
+            console.log('Por favor, completa todos los campos.');
+        }
 
-  let usuarioEncontrado = usuarios.find(usuario => usuario.contraseña === datosUsuario.contraseña);
+        // Restablecer los campos después del inicio de sesión
+        document.getElementById("nombreInput").value = "";
+        document.getElementById("apellidoInput").value = "";
+        document.getElementById("fechaInput").value = "";
+        document.getElementById("contraseñaInput").value = "";
 
-  console.log("Tu nombre completo es: " + usuarioEncontrado.nombre + " " + usuarioEncontrado.apellido);
-  console.log("Tu fecha de cumpleaños es: " + usuarioEncontrado.fechaCumpleaños);
+        // Puedes agregar más lógica según tus necesidades
+    });
 
-} else {
-  alert("Has agotado tus intentos. Acceso denegado.");
-}
+    verificarContraseñaButton.addEventListener('click', function () {
+        let contraseñaIngresada = prompt("Ingresa tu contraseña para verificar:");
+
+        if (contraseñaIngresada === usuarioActual.contraseña) {
+            alert(`Contraseña verificada con éxito, acceso completo ${usuarioActual.nombre}. ¡Bienvenido de nuevo!`);
+        } else {
+            intentos--;
+            alert(`Contraseña incorrecta. Te quedan ${intentos} intentos.`);
+
+            if (intentos === 0) {
+                alert("Has agotado tus intentos. Acceso denegado.");
+                agradecimientoDiv.style.display = 'none';
+                formularioDiv.style.opacity = '1';
+            }
+        }
+    });
+});

@@ -1,15 +1,35 @@
-<!DOCTYPE html>
+<!-- index.html -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto JavaScript</title>
-    <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
 <body>
-    <div id="formulario">
-        <a href="./iniciosesion.html">Inicio de Sesión</a>
+    <div id="formulario" class="tarjeta">
+            <label for="nombreInput">Nombre:</label>
+            <input type="text" id="nombreInput">
+            <br>
+            <label for="apellidoInput">Apellido:</label>
+            <input type="text" id="apellidoInput">
+            <br>
+            <label  for="fechaInput">Fecha de Cumpleaños:</label>
+            <input type="text" id="fechaInput">
+            <br>
+            <label for="contraseñaInput">Contraseña:</label>
+            <input type="password" id="contraseñaInput">
+            <br>
+        
+        <button id="inicioSesionButton">Iniciar Sesión</button>
     </div>
+
+    <div id="agradecimiento" class="tarjeta-oculta">
+        <h2>¡Gracias por iniciar sesión!</h2>
+        <p>Te damos la bienvenida. Esperamos que disfrutes de tu experiencia.</p>
+        <button id="verificarContraseña">Verificar Contraseña</button>
+    </div>
+
+    <script src="./index.js"></script>
 </body>
 </html>
