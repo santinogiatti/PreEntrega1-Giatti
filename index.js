@@ -1,4 +1,4 @@
-// index.js
+
 document.addEventListener('DOMContentLoaded', function () {
     let intentos = 2;
 
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     inicioSesionButton.addEventListener('click', function () {
         let datosUsuario = obtenerDatosUsuario();
 
-        // Tu lógica de validación y almacenamiento aquí
-        // Puedes comparar con usuarios almacenados o almacenar directamente en el localStorage
+    
+        
 
         if (datosUsuario.nombre && datosUsuario.apellido && datosUsuario.fechaCumpleaños && datosUsuario.contraseña) {
             // Almacenar información del usuario que inició sesión
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Por favor, completa todos los campos.');
         }
 
-        // Restablecer los campos después del inicio de sesión
+        // Restablecer después del inicio de sesión
         document.getElementById("nombreInput").value = "";
         document.getElementById("apellidoInput").value = "";
         document.getElementById("fechaInput").value = "";
