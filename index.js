@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("fechaInput").value = "";
         document.getElementById("contraseñaInput").value = "";
 
-        // Puedes agregar más lógica según tus necesidades
+    
     });
 
     verificarContraseñaButton.addEventListener('click', function () {
