@@ -1,4 +1,4 @@
-// index.js
+
 document.addEventListener('DOMContentLoaded', function () {
     let intentos = 2;
     let usuarioActual;
@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     inicioSesionButton.addEventListener('click', function () {
         let datosUsuario = obtenerDatosUsuario();
+
+        // Tu lógica de validación y almacenamiento aquí
+        // Puedes comparar con usuarios almacenados o almacenar directamente en el localStorage
 
         if (datosUsuario.nombre && datosUsuario.apellido && datosUsuario.fechaCumpleaños && datosUsuario.contraseña) {
             loadingDiv.style.display = 'block';
@@ -40,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("apellidoInput").value = "";
         document.getElementById("fechaInput").value = "";
         document.getElementById("contraseñaInput").value = "";
+
+        // Puedes agregar más lógica según tus necesidades
     });
 
     verificarContraseñaButton.addEventListener('click', function () {
