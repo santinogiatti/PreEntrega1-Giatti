@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     loadingDiv.style.display = 'none';
                 });
         } else {
-            console.log('Por favor, completa todos los campos.');
+            alert('Por favor, completa todos los campos.');
         }
 
         // Restablecer después del inicio de sesión
