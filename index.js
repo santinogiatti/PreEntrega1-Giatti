@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
     function obtenerDatosUsuario() {
         return {
             nombre: document.getElementById("nombreInput").value,
