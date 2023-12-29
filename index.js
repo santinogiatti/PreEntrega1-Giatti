@@ -1,53 +1,45 @@
 // index.js
 document.addEventListener('DOMContentLoaded', function () {
     let intentos = 2;
-
-    let usuarioActual; // Almacena la información del usuario que inició sesión
-
-    function obtenerDatosUsuario() {
-        return {
-            nombre: document.getElementById("nombreInput").value,
-            apellido: document.getElementById("apellidoInput").value,
-            fechaCumpleaños: document.getElementById("fechaInput").value,
-            contraseña: document.getElementById("contraseñaInput").value
-        };
-    }
-
+    let usuarioActual;
     let formularioDiv = document.getElementById('formulario');
     let agradecimientoDiv = document.getElementById('agradecimiento');
     let inicioSesionButton = document.getElementById('inicioSesionButton');
     let verificarContraseñaButton = document.getElementById('verificarContraseña');
+    let loadingDiv = document.getElementById('loading');
 
     inicioSesionButton.addEventListener('click', function () {
         let datosUsuario = obtenerDatosUsuario();
 
-        // Tu lógica de validación y almacenamiento aquí
-        // Puedes comparar con usuarios almacenados o almacenar directamente en el localStorage
-
         if (datosUsuario.nombre && datosUsuario.apellido && datosUsuario.fechaCumpleaños && datosUsuario.contraseña) {
-            // Almacenar información del usuario que inició sesión
-            usuarioActual = datosUsuario;
+            loadingDiv.style.display = 'block';
 
-            // Si se ingresaron todos los datos, mostrar la tarjeta de agradecimiento
-            formularioDiv.style.opacity = '0';
-            agradecimientoDiv.style.display = 'block';
-            setTimeout(() => {
-                agradecimientoDiv.style.opacity = '1';
-                // Llamar al usuario por su nombre
-                alert(`¡Acceso intermedio`);
-            }, 100);
+            // Simular una llamada asíncrona a una API o servidor usando Fetch
+            fetch('https://jsonplaceholder.typicode.com/posts/1')
+                .then(response => response.json())
+                .then(data => {
+                    usuarioActual = datosUsuario;
+                    formularioDiv.style.opacity = '0';
+                    agradecimientoDiv.style.display = 'block';
+                    setTimeout(() => {
+                        agradecimientoDiv.style.opacity = '1';
+                        alert(`¡Acceso intermedio! ${data.title}`);
+                        loadingDiv.style.display = 'none';
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error en la llamada asíncrona:', error);
+                    loadingDiv.style.display = 'none';
+                });
         } else {
-            // Manejar el caso en el que no se ingresaron todos los datos
             console.log('Por favor, completa todos los campos.');
         }
 
-        // Restablecer los campos después del inicio de sesión
+        // Restablecer después del inicio de sesión
         document.getElementById("nombreInput").value = "";
         document.getElementById("apellidoInput").value = "";
         document.getElementById("fechaInput").value = "";
         document.getElementById("contraseñaInput").value = "";
-
-        // Puedes agregar más lógica según tus necesidades
     });
 
     verificarContraseñaButton.addEventListener('click', function () {
@@ -66,4 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    function obtenerDatosUsuario() {
+        return {
+            nombre: document.getElementById("nombreInput").value,
+            apellido: document.getElementById("apellidoInput").value,
+            fechaCumpleaños: document.getElementById("fechaInput").value,
+            contraseña: document.getElementById("contraseñaInput").value
+        };
+    }
 });
